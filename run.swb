@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#SBATCH --job-name="jack_bert_gpu_tf2"
+#SBATCH --output="jack_bert_gpu_tf2.%j.%N.out"
+#SBATCH --error="jack_bert_gpu_tf2.%j.%N.out"
+#SBATCH --partition=gpu
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=32
+#SBATCH --gres=gpu:v100:1
+#SBATCH --export=ALL
+#SBATCH -t 24:00:00
+#SBATCH --reservation=uiuc_34
+#SBATCH --mail-type=BEGIN
+#SBATCH --mail-user=haob2
+
+module load opence
+cd ~/bert-tf2-offi
+time python pretrain.py
+
+echo Comments: $2
